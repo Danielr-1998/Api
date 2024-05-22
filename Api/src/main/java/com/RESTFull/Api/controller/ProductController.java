@@ -22,6 +22,14 @@ public class ProductController {
     public List<Product> getALLProducts(){
         return productService.getALLProducts();
     }
+    //Peticion Create producto
+    // Method: getProductById
+    // Params: @PathVariable
+    @PostMapping
+    public Product createProduct(@RequestBody Product product){
+        return productService.saveProduct(product);
+    }
+
     //Peticion GET de productos con Id
     // Method: getProductById
     // Params: @PathVariable
@@ -45,6 +53,16 @@ public class ProductController {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+
+    //Peticion DELETED de productos con Id
+    // Method: deleteProduct
+    // Params: @PathVariable
+    @DeleteMapping ("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
+        productService.deleteProduct(id);
+        return ResponseEntity.ok().build();
     }
 
 }
